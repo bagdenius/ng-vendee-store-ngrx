@@ -4,7 +4,7 @@ type ButtonVariant =
   'primary' | 'secondary' | 'destructive' | 'ghost' | 'link' | 'icon';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
-const variantClasses: Record<ButtonVariant, string> = {
+const variants: Record<ButtonVariant, string> = {
   primary: 'bg-slate-900 text-white hover:bg-slate-800 focus:ring-slate-900',
   secondary:
     'bg-slate-100 text-slate-900 hover:bg-slate-200 focus:ring-slate-500',
@@ -15,13 +15,13 @@ const variantClasses: Record<ButtonVariant, string> = {
   icon: 'bg-transparent text-slate-900 hover:bg-slate-100 focus:ring-slate-500',
 };
 
-const sizeClasses: Record<ButtonSize, string> = {
+const sizes: Record<ButtonSize, string> = {
   sm: 'h-8 px-3 text-sm',
   md: 'h-10 px-4 text-sm',
   lg: 'h-12 px-6 text-base',
 };
 
-const iconSizeClasses: Record<ButtonSize, string> = {
+const iconSizes: Record<ButtonSize, string> = {
   sm: 'size-8',
   md: 'size-10',
   lg: 'size-12',
@@ -42,13 +42,11 @@ export class Button {
   readonly disabled = input<boolean>(false);
 
   protected readonly hostClasses = computed(() => {
-    const baseClass =
+    const base =
       'inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-white dark:ring-offset-slate-900 cursor-pointer disabled:cursor-not-allowed';
-    const variantClass = variantClasses[this.variant()];
-    const sizeClass =
-      this.variant() === 'icon'
-        ? iconSizeClasses[this.size()]
-        : sizeClasses[this.size()];
-    return `${baseClass} ${variantClass} ${sizeClass}`;
+    const variant = variants[this.variant()];
+    const size =
+      this.variant() === 'icon' ? iconSizes[this.size()] : sizes[this.size()];
+    return `${base} ${variant} ${size}`;
   });
 }

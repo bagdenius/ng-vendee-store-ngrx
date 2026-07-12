@@ -3,7 +3,7 @@
     Join Vendee today
   </h1>
 
-  <form class="space-y-6">
+  <form class="space-y-6" (submit)="onSubmit($event)">
     <div>
       <label
         class="block text-sm font-medium text-slate-700 mb-2"
@@ -14,10 +14,12 @@
       <input
         id="username"
         type="text"
+        [formField]="signupForm.username"
         class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent outline-none"
         autocomplete="username"
         placeholder="johndoe"
       />
+      <form-errors [control]="signupForm.username()" />
     </div>
 
     <div>
@@ -27,10 +29,12 @@
       <input
         id="email"
         type="text"
+        [formField]="signupForm.email"
         class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent outline-none"
         autocomplete="email"
         placeholder="johndoe@example.com"
       />
+      <form-errors [control]="signupForm.email()" />
     </div>
 
     <div>
@@ -43,10 +47,12 @@
       <input
         id="password"
         type="password"
+        [formField]="signupForm.password"
         class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent outline-none"
         autocomplete="new-password"
-        placeholder="********"
+        placeholder="••••••••"
       />
+      <form-errors [control]="signupForm.password()" />
     </div>
 
     <div>
@@ -59,13 +65,17 @@
       <input
         id="password-confirm"
         type="password"
+        [formField]="signupForm.passwordConfirmation"
         class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent outline-none"
         autocomplete="new-password"
-        placeholder="********"
+        placeholder="••••••••"
       />
+      <form-errors [control]="signupForm.passwordConfirmation()" />
     </div>
 
-    <button appButton class="w-full">Continue</button>
+    <button appButton class="w-full" [disabled]="signupForm().invalid()">
+      Continue
+    </button>
 
     <p class="text-sm text-center textslate500 mt-4">
       Already have an account?
