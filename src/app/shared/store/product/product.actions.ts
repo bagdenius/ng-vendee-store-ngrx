@@ -1,0 +1,11 @@
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { ProductModel } from '../../../core/models/product.model';
+
+export const productActions = createActionGroup({
+  source: 'Product',
+  events: {
+    Load: emptyProps(),
+    'Load Success': props<{ products: ProductModel[] }>(),
+    'Load Failure': props<{ error: string }>(),
+  },
+});

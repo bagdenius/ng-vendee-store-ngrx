@@ -1,4 +1,8 @@
 import { Routes } from '@angular/router';
+import { provideState } from '@ngrx/store';
+import { productFeature } from './shared/store/product/product.feature';
+import { provideEffects } from '@ngrx/effects';
+import * as productEffects from './shared/store/product/product.effects';
 
 export const routes: Routes = [
   {
@@ -14,6 +18,10 @@ export const routes: Routes = [
         path: 'products',
         loadComponent: () =>
           import('./pages/products/products').then((m) => m.ProductsPage),
+        providers: [
+          provideState(productFeature),
+          provideEffects(productEffects),
+        ],
       },
       {
         path: 'cart',

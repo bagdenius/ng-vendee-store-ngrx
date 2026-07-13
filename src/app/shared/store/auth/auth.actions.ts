@@ -7,10 +7,10 @@ export const authActions = createActionGroup({
   events: {
     Login: props<LoginModel>(),
     'Login Success': props<LoginResponse>(),
-    'Login Failure': props<{ error: any }>(),
+    'Login Failure': props<{ error: string }>(),
 
     Signup: props<SignupModel>(),
     'Signup Success': props<{ username: string }>(),
-    'Signup Failure': props<{ error: any }>(),
+    'Signup Failure': props<{ error: string }>(),
   },
 });

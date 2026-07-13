@@ -6,6 +6,7 @@ import { authActions } from './auth.actions';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { extractTokenPayload } from '../../utils/extract-token.util';
 import { NgToastService } from 'ng-angular-popup';
+import { getErrorMessage } from '../../utils/get-error-message.util';
 
 export const loginEffect = createEffect(
   (
@@ -24,12 +25,7 @@ export const loginEffect = createEffect(
               'Logging in failed!',
             );
             return of(
-              authActions.loginFailure({
-                error:
-                  error.error?.message ??
-                  error.message ??
-                  'Something went wrong',
-              }),
+              authActions.loginFailure({ error: getErrorMessage(error) }),
             );
           }),
         ),
@@ -79,12 +75,7 @@ export const signupEffect = createEffect(
           catchError((error) => {
             toaster.danger('Something went wrong :(', 'Signing in failed!');
             return of(
-              authActions.signupFailure({
-                error:
-                  error.error?.message ??
-                  error.message ??
-                  'Something went wrong',
-              }),
+              authActions.signupFailure({ error: getErrorMessage(error) }),
             );
           }),
         ),
