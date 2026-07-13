@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { ProductModel } from '../../../core/models/product.model';
+import { ProductModel } from '../../models/product.model';
 import { productActions } from './product.actions';
 
 export interface ProductState {

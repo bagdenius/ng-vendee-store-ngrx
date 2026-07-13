@@ -4,9 +4,9 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { authActions } from './auth.actions';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
-import { extractTokenPayload } from '../../utils/extract-token.util';
+import { extractTokenPayload } from '../../../shared/utils/extract-token.util';
 import { NgToastService } from 'ng-angular-popup';
-import { getErrorMessage } from '../../utils/get-error-message.util';
+import { getErrorMessage } from '../../../shared/utils/get-error-message.util';
 
 export const loginEffect = createEffect(
   (

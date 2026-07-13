@@ -12,8 +12,8 @@ import { Store } from '@ngrx/store';
 import { LoginModel } from '../../core/models/login.model';
 import { Button } from '../../shared/components/button/button';
 import { FormErrors } from '../../shared/components/form/form-errors/form-errors';
-import { authActions } from '../../shared/store/auth/auth.actions';
-import { authFeature } from '../../shared/store/auth/auth.feature';
+import { authActions } from '../../core/store/auth/auth.actions';
+import { authFeature } from '../../core/store/auth/auth.feature';
 import { loginSchema } from './login.schema';
 
 @Component({

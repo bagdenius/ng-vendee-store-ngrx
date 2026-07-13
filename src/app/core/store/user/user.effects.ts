@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UserService } from '../../services/user.service';
 import { userActions } from './user.actions';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { getErrorMessage } from '../../utils/get-error-message.util';
+import { getErrorMessage } from '../../../shared/utils/get-error-message.util';
 
 export const loadUserEffect = createEffect(
   (actions$ = inject(Actions), userService = inject(UserService)) =>

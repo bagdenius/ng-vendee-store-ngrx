@@ -3,7 +3,7 @@ import { productActions } from './product.actions';
 import { inject } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { getErrorMessage } from '../../utils/get-error-message.util';
+import { getErrorMessage } from '../../../shared/utils/get-error-message.util';
 
 export const productLoadEffect = createEffect(
   (actions$ = inject(Actions), productService = inject(ProductService)) =>

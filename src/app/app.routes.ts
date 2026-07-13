@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
-import * as productEffects from './shared/store/product/product.effects';
-import { productFeature } from './shared/store/product/product.feature';
-import * as userEffects from './shared/store/user/user.effects';
-import { userFeature } from './shared/store/user/user.feature';
+import * as productEffects from './core/store/product/product.effects';
+import { productFeature } from './core/store/product/product.feature';
+import * as userEffects from './core/store/user/user.effects';
+import { userFeature } from './core/store/user/user.feature';
 
 export const routes: Routes = [
   {

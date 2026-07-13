@@ -6,8 +6,8 @@ import { FormErrors } from '../../shared/components/form/form-errors/form-errors
 import { signupSchema } from './signup.schema';
 import { SignupModel } from '../../core/models/signup.model';
 import { Store } from '@ngrx/store';
-import { authFeature } from '../../shared/store/auth/auth.feature';
-import { authActions } from '../../shared/store/auth/auth.actions';
+import { authFeature } from '../../core/store/auth/auth.feature';
+import { authActions } from '../../core/store/auth/auth.actions';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({

@@ -9,8 +9,8 @@ import { provideNgToast } from 'ng-angular-popup';
 import { routes } from './app.routes';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import * as authEffects from './shared/store/auth/auth.effects';
-import { authFeature } from './shared/store/auth/auth.feature';
+import * as authEffects from './core/store/auth/auth.effects';
+import { authFeature } from './core/store/auth/auth.feature';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {

@@ -7,9 +7,9 @@ import {
   LucideUser,
 } from '@lucide/angular';
 import { Store } from '@ngrx/store';
-import { userFeature } from '../../shared/store/user/user.feature';
-import { userActions } from '../../shared/store/user/user.actions';
-import { authFeature } from '../../shared/store/auth/auth.feature';
+import { userFeature } from '../../core/store/user/user.feature';
+import { userActions } from '../../core/store/user/user.actions';
+import { authFeature } from '../../core/store/auth/auth.feature';
 import { getUserIdFromLocalStorage } from '../../shared/utils/get-user-id-from-local-storage.util';
 
 @Component({

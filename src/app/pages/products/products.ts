@@ -3,8 +3,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ProductCard } from '../../core/components/products/product-card/product-card';
-import { productActions } from '../../shared/store/product/product.actions';
-import { productFeature } from '../../shared/store/product/product.feature';
+import { productActions } from '../../core/store/product/product.actions';
+import { productFeature } from '../../core/store/product/product.feature';
 
 @Component({
   selector: 'products-page',
