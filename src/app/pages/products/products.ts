@@ -26,7 +26,8 @@ export class ProductsPage implements OnInit {
   protected searchQuery = signal('');
 
   public ngOnInit(): void {
-    if (!this.products().length) this.store.dispatch(productActions.load());
+    const products = this.products();
+    if (!products.length) this.store.dispatch(productActions.load());
   }
 
   protected onSearch() {

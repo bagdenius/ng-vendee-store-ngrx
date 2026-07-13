@@ -48,7 +48,7 @@ export class LoginPage implements OnInit {
   protected onSubmit(event: Event) {
     event.preventDefault();
     if (this.loginForm().valid()) {
-      this.store.dispatch(authActions.login(this.loginModel()));
+      this.store.dispatch(authActions.login({ loginData: this.loginModel() }));
     } else {
       console.log('Form is invalid');
     }

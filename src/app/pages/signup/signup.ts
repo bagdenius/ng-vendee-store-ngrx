@@ -36,7 +36,9 @@ export class SignupPage {
   protected onSubmit(event: Event) {
     event.preventDefault();
     if (this.signupForm().valid()) {
-      this.store.dispatch(authActions.signup(this.signupModel()));
+      this.store.dispatch(
+        authActions.signup({ signupData: this.signupModel() }),
+      );
     } else {
       console.log('Form is invalid');
     }

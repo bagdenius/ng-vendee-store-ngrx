@@ -16,8 +16,8 @@ export const loginEffect = createEffect(
   ) =>
     actions$.pipe(
       ofType(authActions.login),
-      switchMap((loginModel) =>
-        authService.login(loginModel).pipe(
+      switchMap(({ loginData }) =>
+        authService.login(loginData).pipe(
           map(({ token }) => {
             const payload = extractTokenPayload(token);
             if (!payload?.sub) throw new Error('Invalid token');
