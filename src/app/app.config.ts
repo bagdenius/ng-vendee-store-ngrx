@@ -4,6 +4,7 @@ import {
   isDevMode,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideNgToast } from 'ng-angular-popup';
 
 import { routes } from './app.routes';
 import { provideState, provideStore } from '@ngrx/store';
@@ -21,5 +22,10 @@ export const appConfig: ApplicationConfig = {
     provideEffects(authEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideStoreDevtools(),
+    provideNgToast({
+      duration: 3000,
+      position: 'toaster-top-center',
+      minWidth: 300,
+    }),
   ],
 };

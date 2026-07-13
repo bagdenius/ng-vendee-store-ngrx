@@ -1,1 +1,39 @@
-<h1>Header</h1>
+<div
+  class="sticky top-0 z-50 w-full px-4 py-3 bg-slate-900 text-white shadow-lg"
+>
+  <nav class="container mx-auto flex items-center justify-between">
+    <a routerLink="/" class="text-xl font-bold tracking-tight">VENDEE</a>
+    <div class="flex items-center gap-4">
+      <button
+        appButton
+        variant="ghost"
+        type="button"
+        class="text-white hover:text-gray-300 hover:bg-white/10"
+        routerLink="/profile"
+      >
+        <svg lucideUser class="size-5"></svg>
+      </button>
+      <button
+        appButton
+        variant="ghost"
+        type="button"
+        class="relative text-white hover:text-gray-300 hover:bg-white/10"
+        routerLink="/cart"
+      >
+        <svg lucideShoppingCart class="size-5"></svg>
+        <span
+          class="absolute -top-1 -right-1 size-5 flex items-center justify-center bg-amber-500 text-xs font-medium rounded-full"
+          >10</span
+        >
+      </button>
+      <button
+        appButton
+        variant="ghost"
+        type="button"
+        class="text-white hover:text-gray-300 hover:bg-white/10"
+      >
+        <svg lucideLogOut class="size-5"></svg>
+      </button>
+    </div>
+  </nav>
+</div>

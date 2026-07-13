@@ -9,6 +9,7 @@ export const routes: Routes = [
       ),
     // canActivate: [authGuard],
     children: [
+      { path: '', redirectTo: 'products', pathMatch: 'full' },
       {
         path: 'products',
         loadComponent: () =>

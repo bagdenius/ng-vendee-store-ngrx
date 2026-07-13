@@ -7,5 +7,8 @@ import { Footer } from '../../../shared/components/footer/footer';
   selector: 'main-layout',
   imports: [RouterOutlet, Header, Footer],
   templateUrl: './main-layout.html',
+  host: {
+    class: 'min-h-screen flex flex-col',
+  },
 })
 export class MainLayout {}
