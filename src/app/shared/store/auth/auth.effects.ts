@@ -18,7 +18,15 @@ export const loginEffect = createEffect(
       ofType(authActions.login),
       switchMap((loginModel) =>
         authService.login(loginModel).pipe(
-          map((response) => authActions.loginSuccess(response)),
+          map(({ token }) => {
+            const payload = extractTokenPayload(token);
+            if (!payload?.sub) throw new Error('Invalid token');
+
+            return authActions.loginSuccess({
+              token,
+              userId: Number(payload?.sub),
+            });
+          }),
           catchError((error) => {
             toaster.danger(
               'Provided username or password is invalid',
@@ -42,14 +50,9 @@ export const loginSuccessEffect = createEffect(
   ) =>
     actions$.pipe(
       ofType(authActions.loginSuccess),
-      tap(({ token }) => {
-        // test flow with local storage
-        const payload = extractTokenPayload(token);
-        if (payload) {
-          localStorage.setItem('ngrxstore:accessToken', token);
-          localStorage.setItem('ngrxstore:userId', payload.sub.toString());
-          localStorage.setItem('ngrxstore:username', payload.user);
-        }
+      tap(({ token, userId }) => {
+        localStorage.setItem('ngrxstore:accessToken', token);
+        localStorage.setItem('ngrxstore:userId', userId.toString());
 
         toaster.success(
           'Welcome and happy shopping!',
@@ -69,8 +72,8 @@ export const signupEffect = createEffect(
   ) =>
     actions$.pipe(
       ofType(authActions.signup),
-      switchMap((signupModel) =>
-        authService.signup(signupModel).pipe(
+      switchMap(({ signupData }) =>
+        authService.signup(signupData).pipe(
           map(({ username }) => authActions.signupSuccess({ username })),
           catchError((error) => {
             toaster.danger('Something went wrong :(', 'Signing in failed!');

@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
-import { provideState } from '@ngrx/store';
-import { productFeature } from './shared/store/product/product.feature';
 import { provideEffects } from '@ngrx/effects';
+import { provideState } from '@ngrx/store';
 import * as productEffects from './shared/store/product/product.effects';
+import { productFeature } from './shared/store/product/product.feature';
+import * as userEffects from './shared/store/user/user.effects';
+import { userFeature } from './shared/store/user/user.feature';
 
 export const routes: Routes = [
   {
@@ -32,6 +34,7 @@ export const routes: Routes = [
         path: 'profile',
         loadComponent: () =>
           import('./pages/profile/profile').then((m) => m.ProfilePage),
+        providers: [provideState(userFeature), provideEffects(userEffects)],
       },
     ],
   },
