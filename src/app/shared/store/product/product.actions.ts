@@ -7,5 +7,7 @@ export const productActions = createActionGroup({
     Load: emptyProps(),
     'Load Success': props<{ products: ProductModel[] }>(),
     'Load Failure': props<{ error: string }>(),
+
+    Search: props<{ searchQuery: string }>(),
   },
 });

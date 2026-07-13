@@ -4,12 +4,16 @@ import { productActions } from './product.actions';
 
 export interface ProductState {
   products: ProductModel[];
+  filteredProducts: ProductModel[];
+  searchQuery: string | null;
   isLoading: boolean;
   error: string | null;
 }
 
 export const initialProductState: ProductState = {
   products: [],
+  filteredProducts: [],
+  searchQuery: null,
   isLoading: false,
   error: null,
 };
@@ -26,6 +30,7 @@ export const productFeature = createFeature({
     on(productActions.loadSuccess, (state, { products }) => ({
       ...state,
       products,
+      filteredProducts: products,
       isLoading: false,
       error: null,
     })),
@@ -34,5 +39,16 @@ export const productFeature = createFeature({
       isLoading: false,
       error,
     })),
+
+    on(productActions.search, (state, { searchQuery }) => {
+      const filteredProducts = state.products.filter((p) =>
+        p.title.toLowerCase().includes(searchQuery.toLowerCase()),
+      );
+      return {
+        ...state,
+        searchQuery,
+        filteredProducts,
+      };
+    }),
   ),
 });

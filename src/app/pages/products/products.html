@@ -1,1 +1,31 @@
-<h1>Products Page</h1>
+<div class="py-8">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-3xl font-bold text-slate-900 mb-8">Products</h1>
+    <div class="search">
+      <input
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="onSearch()"
+        class="w-72 p-2 border border-slate-200 rounded focus:outline-none focus:ring-2 focus:ringslate500"
+        type="text"
+        placeholder="Search for products..."
+      />
+    </div>
+  </div>
+  @if (isLoading()) {
+    <div class="flex items-center justify-center">
+      <p>Loading products...</p>
+    </div>
+  }
+  @if (!products().length && !isLoading) {
+    <div class="flex items center justify-center">
+      <p>No products available.</p>
+    </div>
+  }
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+  >
+    @for (product of products(); track product.id) {
+      <product-card [product]="product" />
+    }
+  </div>
+</div>

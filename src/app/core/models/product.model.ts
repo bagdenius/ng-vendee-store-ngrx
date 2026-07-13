@@ -5,7 +5,7 @@ export interface ProductModel {
   description: string;
   category: string;
   image: string;
-  ratings: RatingModel;
+  rating: RatingModel;
 }
 
 export interface RatingModel {
