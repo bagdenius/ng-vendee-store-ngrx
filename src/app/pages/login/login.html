@@ -40,8 +40,12 @@
       <form-errors [control]="loginForm.password()" />
     </div>
 
-    <button appButton class="w-full" [disabled]="loginForm().invalid()">
-      Log in
+    <button
+      appButton
+      class="w-full"
+      [disabled]="loginForm().invalid() || isLoading()"
+    >
+      {{ isLoading() ? 'Logging in...' : 'Log in' }}
     </button>
 
     <p class="text-sm text-center textslate500 mt-4">

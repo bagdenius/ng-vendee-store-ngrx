@@ -5,13 +5,7 @@ import {
   schema,
   validate,
 } from '@angular/forms/signals';
-
-export interface SignupModel {
-  username: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-}
+import { SignupModel } from '../../core/models/signup.model';
 
 export const signupSchema = schema<SignupModel>((schemaPath) => {
   required(schemaPath.username, { message: 'Username is required' });
@@ -23,8 +17,8 @@ export const signupSchema = schema<SignupModel>((schemaPath) => {
   email(schemaPath.email, { message: 'Please enter a valid email address' });
 
   required(schemaPath.password, { message: 'Password is required' });
-  minLength(schemaPath.password, 8, {
-    message: 'Password should be at least 8 characters long',
+  minLength(schemaPath.password, 6, {
+    message: 'Password should be at least 6 characters long',
   });
 
   required(schemaPath.passwordConfirmation, {

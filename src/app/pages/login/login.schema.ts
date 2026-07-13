@@ -1,9 +1,5 @@
 import { minLength, required, schema } from '@angular/forms/signals';
-
-export interface LoginModel {
-  username: string;
-  password: string;
-}
+import { LoginModel } from '../../core/models/login.model';
 
 export const loginSchema = schema<LoginModel>((schemaPath) => {
   required(schemaPath.username, { message: 'Username is required' });
@@ -12,7 +8,7 @@ export const loginSchema = schema<LoginModel>((schemaPath) => {
   });
 
   required(schemaPath.password, { message: 'Password is required' });
-  minLength(schemaPath.password, 8, {
-    message: 'Password should be at least 8 characters long',
+  minLength(schemaPath.password, 6, {
+    message: 'Password should be at least 6 characters long',
   });
 });
