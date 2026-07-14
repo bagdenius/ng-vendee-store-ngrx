@@ -31,8 +31,13 @@
         variant="ghost"
         type="button"
         class="text-white hover:text-gray-300 hover:bg-white/10"
+        (click)="logout()"
       >
-        <svg lucideLogOut class="size-5"></svg>
+        @if (isLoggingOut()) {
+          <p>Logging out...</p>
+        } @else {
+          <svg lucideLogOut class="size-5"></svg>
+        }
       </button>
     </div>
   </nav>

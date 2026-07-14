@@ -1,4 +1,4 @@
-import { createActionGroup, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { LoginModel } from '../../models/login.model';
 import { SignupModel } from '../../models/signup.model';
 
@@ -12,6 +12,10 @@ export const authActions = createActionGroup({
     Signup: props<{ signupData: SignupModel }>(),
     'Signup Success': props<{ username: string }>(),
     'Signup Failure': props<{ error: string }>(),
+
+    Logout: emptyProps(),
+    'Logout Success': emptyProps(),
+    'Logout Failure': props<{ error: string }>(),
 
     // Todo: implement actions for restoring the session on app init and remove workaround from profile page onInit
   },

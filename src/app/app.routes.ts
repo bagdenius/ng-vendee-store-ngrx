@@ -7,6 +7,7 @@ import * as userEffects from './core/store/user/user.effects';
 import { userFeature } from './core/store/user/user.feature';
 import { cartFeature } from './core/store/cart/cart.feature';
 import * as cartEffects from './core/store/cart/cart.effects';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -16,7 +17,7 @@ export const routes: Routes = [
         (m) => m.MainLayout,
       ),
     providers: [provideState(cartFeature), provideEffects(cartEffects)],
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'products', pathMatch: 'full' },
       {

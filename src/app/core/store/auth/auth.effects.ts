@@ -28,6 +28,7 @@ export const loginEffect = createEffect(
             });
           }),
           catchError((error) => {
+            // better to take out the toaster to login failure effect tap pipe
             toaster.danger(
               'Provided username or password is invalid',
               'Logging in failed!',
@@ -76,6 +77,7 @@ export const signupEffect = createEffect(
         authService.signup(signupData).pipe(
           map(({ username }) => authActions.signupSuccess({ username })),
           catchError((error) => {
+            // better to take out the toaster to singup failure effect tap pipe
             toaster.danger('Something went wrong :(', 'Signing in failed!');
             return of(
               authActions.signupFailure({ error: getErrorMessage(error) }),
@@ -101,4 +103,37 @@ export const signupSuccessEffect = createEffect(
       }),
     ),
   { functional: true, dispatch: false },
+);
+
+export const logoutEffect = createEffect(
+  (
+    actions$ = inject(Actions),
+    authService = inject(AuthService),
+    router = inject(Router),
+    toaster = inject(NgToastService),
+  ) =>
+    actions$.pipe(
+      ofType(authActions.logout),
+      switchMap(() =>
+        authService.logout().pipe(
+          map(() => {
+            // better to take out the routing and toaster to logout failure effect tap pipe
+            toaster.success(
+              'Logged out successfully!',
+              "We'll be glad to see you again!",
+            );
+            router.navigateByUrl('/login');
+            return authActions.logoutSuccess();
+          }),
+          catchError((error) => {
+            // better to take out the toaster to logout failure effect tap pipe
+            toaster.danger('Something went wrong :(', 'Logging out failed!');
+            return of(
+              authActions.logoutFailure({ error: getErrorMessage(error) }),
+            );
+          }),
+        ),
+      ),
+    ),
+  { functional: true },
 );

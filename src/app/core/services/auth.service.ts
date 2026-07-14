@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { delay, Observable, of } from 'rxjs';
 import { SignupModel, SignupResponse } from '../../core/models/signup.model';
 import { LoginModel, LoginResponse } from '../../core/models/login.model';
 
@@ -25,5 +25,11 @@ export class AuthService {
       `${this.authApiUrl}/login`,
       data,
     );
+  }
+
+  public logout(): Observable<void> {
+    localStorage.removeItem('ngrxstore:accessToken');
+    localStorage.removeItem('ngrxstore:userId');
+    return of(void 0).pipe(delay(200));
   }
 }

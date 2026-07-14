@@ -1,4 +1,4 @@
-import { createFeature, createReducer, on } from '@ngrx/store';
+import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { authActions } from './auth.actions';
 
 export interface AuthState {
@@ -8,8 +8,11 @@ export interface AuthState {
   isLoading: boolean;
 }
 
+const getStoredToken = (): string | null =>
+  localStorage.getItem('ngrxstore:token');
+
 export const initialAuthState: AuthState = {
-  token: null,
+  token: getStoredToken(),
   userId: null,
   isLoading: false,
   error: null,
@@ -17,6 +20,8 @@ export const initialAuthState: AuthState = {
 
 export const authFeature = createFeature({
   name: 'auth',
+
+  // Login
   reducer: createReducer(
     initialAuthState,
     on(authActions.login, (state) => ({
@@ -38,6 +43,7 @@ export const authFeature = createFeature({
       token: null,
     })),
 
+    // Signup
     on(authActions.signup, (state) => ({
       ...state,
       token: null,
@@ -56,5 +62,28 @@ export const authFeature = createFeature({
       isLoading: false,
       error,
     })),
+
+    // Logout
+    on(authActions.logout, (state) => ({
+      ...state,
+      isLoading: true,
+      error: null,
+    })),
+    on(authActions.logoutSuccess, (state) => ({
+      ...state,
+      token: null,
+      userId: null,
+      isLoading: false,
+      error: null,
+    })),
+    on(authActions.logoutFailure, (state, { error }) => ({
+      ...state,
+      isLoading: false,
+      error,
+    })),
   ),
+
+  extraSelectors: ({ selectToken }) => ({
+    selectIsAuthenticated: createSelector(selectToken, (token) => !!token),
+  }),
 });
