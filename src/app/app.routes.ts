@@ -5,6 +5,8 @@ import * as productEffects from './core/store/product/product.effects';
 import { productFeature } from './core/store/product/product.feature';
 import * as userEffects from './core/store/user/user.effects';
 import { userFeature } from './core/store/user/user.feature';
+import { cartFeature } from './core/store/cart/cart.feature';
+import * as cartEffects from './core/store/cart/cart.effects';
 
 export const routes: Routes = [
   {
@@ -13,6 +15,7 @@ export const routes: Routes = [
       import('./core/layouts/main-layout/main-layout').then(
         (m) => m.MainLayout,
       ),
+    providers: [provideState(cartFeature), provideEffects(cartEffects)],
     // canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'products', pathMatch: 'full' },

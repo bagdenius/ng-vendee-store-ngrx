@@ -1,17 +1,17 @@
 import {
   ApplicationConfig,
-  provideBrowserGlobalErrorListeners,
   isDevMode,
+  provideBrowserGlobalErrorListeners,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideNgToast } from 'ng-angular-popup';
 
-import { routes } from './app.routes';
-import { provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
+import { provideState, provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { routes } from './app.routes';
 import * as authEffects from './core/store/auth/auth.effects';
 import { authFeature } from './core/store/auth/auth.feature';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
   providers: [
