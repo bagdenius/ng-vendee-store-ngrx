@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import { ProductCard } from '../../core/components/products/product-card/product-card';
 import { productActions } from '../../core/store/product/product.actions';
 import { productFeature } from '../../core/store/product/product.feature';
+import { ProductModel } from '../../core/models/product.model';
+import { cartActions } from '../../core/store/cart/cart.actions';
 
 @Component({
   selector: 'products-page',
@@ -34,5 +36,9 @@ export class ProductsPage implements OnInit {
     this.store.dispatch(
       productActions.search({ searchQuery: this.searchQuery() }),
     );
+  }
+
+  protected onAddToCart(product: ProductModel) {
+    this.store.dispatch(cartActions.addItem({ product }));
   }
 }

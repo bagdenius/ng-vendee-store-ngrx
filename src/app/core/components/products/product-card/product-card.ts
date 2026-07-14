@@ -14,8 +14,7 @@ import { CurrencyPipe } from '@angular/common';
   },
 })
 export class ProductCard {
-  // protected readonly apiUrl = environment.apiUrl;
-  protected readonly addToCard = output<ProductModel>();
-
   public readonly product = input.required<ProductModel>();
+
+  public readonly addToCard = output<ProductModel>();
 }

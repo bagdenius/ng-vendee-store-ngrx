@@ -41,7 +41,7 @@ export const updateItemQuantityInCartEffect = createEffect(
   (actions$ = inject(Actions), cartService = inject(CartService)) =>
     actions$.pipe(
       ofType(cartActions.updateItemQuantity),
-      debounceTime(500),
+      // debounceTime(500),
       concatMap(({ productId, quantity }) =>
         cartService.updateItemQuantity(productId, quantity).pipe(
           map((items) => cartActions.updateItemQuantitySuccess({ items })),

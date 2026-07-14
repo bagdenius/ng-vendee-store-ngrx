@@ -30,6 +30,13 @@
     <span class="text-xl font-bold text-slate-900">{{
       product().price | currency: 'USD'
     }}</span>
-    <button appButton size="sm" type="button">Add to Cart</button>
+    <button
+      appButton
+      size="sm"
+      type="button"
+      (click)="addToCard.emit(product())"
+    >
+      Add to Cart
+    </button>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { delay, Observable, of, switchMap, throwError, timer } from 'rxjs';
+import { delay, Observable, of, switchMap, tap, throwError, timer } from 'rxjs';
 import { CartItemModel } from '../models/cart-item.model';
 import { ProductModel } from '../models/product.model';
 
@@ -7,6 +7,10 @@ import { ProductModel } from '../models/product.model';
 @Injectable({ providedIn: 'root' })
 export class CartService {
   private readonly localStorageKey = 'ngrx_storage:cart';
+
+  private getRandomDelay(min = 50, max = 200): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
   private getFromLocalStore(): CartItemModel[] {
     try {
@@ -22,15 +26,19 @@ export class CartService {
   }
 
   private simulateApi<T>(data: T): Observable<T> {
-    return of(data).pipe(delay(500));
+    return of(data).pipe(delay(this.getRandomDelay()));
   }
 
   private simulateError(error: Error): Observable<never> {
-    return timer(500).pipe(switchMap(() => throwError(() => error)));
+    return timer(this.getRandomDelay()).pipe(
+      switchMap(() => throwError(() => error)),
+    );
   }
 
   public get(): Observable<CartItemModel[]> {
-    return this.simulateApi(this.getFromLocalStore());
+    return this.simulateApi(this.getFromLocalStore()).pipe(
+      tap((items) => this.saveToLocalStore(items)),
+    );
   }
 
   public addItem(product: ProductModel): Observable<CartItemModel[]> {
